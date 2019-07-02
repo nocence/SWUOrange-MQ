@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swuorange.dao.BuyingInfoMapper">
+
+	<delete id="deleteBuy">
+		DELETE
+		FROM
+		`swu_buying_info`
+		WHERE `buy_id` = #{id} ;
+	</delete>
+
+
+	<update id="updateBuy" parameterType="com.swuorange.po.BuyingInfo">
+		UPDATE
+		`swu_buying_info`
+		<set>
+			<if test="productId != null">
+				`product_id` = #{productId},
+			</if>
+			<if test="purchasePrice != null">
+				`purchase_price` = #{purchasePrice},
+			</if>
+			<if test="quantity != null">
+				`quantity` = #{quantity},
+			</if>
+			<if test="location != null">
+				`location` = #{location},
+			</if>
+			<if test="cutoffTime != null">
+				`cutoff_time` = #{cutoffTime},
+			</if>
+			<if test="releaseTime != null">
+				`release_time` = #{releaseTime},
+			</if>
+			<if test="tel != null">
+				`tel` = #{tel},
+			</if>
+			<if test="contact != null">
+				`contact` = #{contact},
+			</if>
+			<if test="details != null">
+				`details` = #{details},
+			</if>
+			<if test="title != null">
+				`title` = #{title},
+			</if>
+			<if test="state != null">
+				`state` = #{state},
+			</if>
+			<if test="remarks != null">
+				`remarks` = #{remarks},
+			</if>
+			<if test="userId != null">
+				`user_id` = #{userId},
+			</if>
+		</set>
+		WHERE `buy_id` = #{buyId} ;
+	</update>
+	<insert id="insertBuy" parameterType="com.swuorange.po.BuyingInfo">
+		INSERT INTO
+		`swu_buying_info` (
+		`product_id`,
+		`purchase_price`,
+		`quantity`,
+		`location`,
+		`cutoff_time`,
+		`release_time`,
+		`tel`,
+		`contact`,
+		`details`,
+		`title`,
+		`remarks`,
+		`user_id`
+		)
+		VALUES		
+		(
+		#{productId},
+		#{purchasePrice},
+		#{quantity},
+		#{location},
+		#{cutoffTime},
+		now(),
+		#{tel},
+		#{contact},
+		#{details},
+		#{title},
+		#{remarks},
+		#{userId}
+		) ;
+	</insert>
+</mapper>

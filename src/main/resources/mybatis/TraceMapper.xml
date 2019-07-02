@@ -1,0 +1,45 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置对应的mapper映射文件 -->
+<mapper namespace="com.swuorange.dao.TraceMapper">
+	<!-- id 要改成对应的mapper文件中方法名 resultType 要改成对应的返回值类型 -->
+
+    <insert id="insert" parameterType="com.swuorange.dto.TraceDTO" >
+    	insert into `swu_application_record` (
+    		`application_code`,
+    		`subbase_id`,
+    		`bacth_id`,
+    		`type`,
+    		`user_id`,
+    		`apply_time`,
+    		`variety_id`,
+    		`companyinfo_id`,
+    		`detail`
+    	)
+    	VALUES
+		 (
+		 #{applicationCode},
+		 #{subbaseId},
+		 #{bacthId},
+		 #{type},
+		 #{userId},
+		 #{applyTime},
+		 #{varietyId},
+		 #{companyinfoId},
+		 #{detail}
+		 )
+    </insert>
+    
+    
+    <update id="update" parameterType="com.swuorange.dto.TraceCheckDTO" >
+    
+    	update swu_application_record set 
+    		type = #{type},
+    		manager_id = #{managerId},
+    		review_time = #{reviewTime},
+    		trace_source = #{traceSource}
+    		where application_id = #{applicationId}
+    
+    </update>
+    
+</mapper>

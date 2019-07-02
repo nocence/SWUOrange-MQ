@@ -1,0 +1,156 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置对应的mapper映射文件 -->
+<mapper namespace="com.swuorange.dao.SubbaseMapper">
+	<!-- id 要改成对应的mapper文件中方法名 resultType 要改成对应的返回值类型 -->
+
+	<!-- <select id="getUser" resultMap="user">
+		SELECT *
+		FROM `user` WHERE `id` = 1
+	</select> -->
+    <!-- useGeneratedkeys="true" -->
+    <insert id="insertSubbase" parameterType="com.swuorange.dto.SubbaseDTO" 
+    		useGeneratedKeys="true" keyProperty="subbaseId">
+    	INSERT INTO `swu_subbase` (
+    		`subbase_name`,
+    		`subbase_address`,
+    		`principal`,
+    		`production_recorder`,
+    		`base_id`,
+    		`companyinfo_id`
+    	)
+    	VALUES
+		 (
+		 #{subbaseName},
+		 #{subbaseAddress},
+		 #{principal},
+		 #{productionRecorder},
+		 #{baseId},
+		 #{companyinfoId}
+		 )
+    </insert>
+    
+    <insert id="insertPR" parameterType="com.swuorange.dto.SubbaseDTO" 
+    		useGeneratedKeys="true" keyProperty="userId">
+    	
+    	insert into swu_user (
+    		account,
+    		password,
+    		realname
+    	)
+    	values(
+    		#{subbasePRaccount},
+    		#{subbasePRpwd},
+    		#{productionRecorder}
+    		)
+    
+    </insert>
+    
+    <insert id="insert2ndStaffpc" parameterType="com.swuorange.dto.SubbaseDTO">
+    	INSERT INTO `swu_secondary_staff` (
+    		`subbase_id`,
+    		`staff_id`,
+    		`companyinfo_id`,
+    		`user_id`
+    	)
+    	VALUES
+		 (
+		 #{subbaseId},
+		 #{subbasePCStaffId},
+		 #{companyinfoId},
+		 0
+		 )
+    </insert>
+    
+     <insert id="insert2ndStaffpr" parameterType="com.swuorange.dto.SubbaseDTO">
+    	INSERT INTO `swu_secondary_staff` (
+    		`subbase_id`,
+    		`staff_id`,
+    		`companyinfo_id`,
+    		`user_id`
+    	)
+    	VALUES
+		 (
+		 #{subbaseId},
+		 #{subbasePRStaffId},
+		 #{companyinfoId},
+		 #{userId}
+		 )
+    </insert>
+    
+    <insert id="insertUserRole" parameterType="com.swuorange.dto.SubbaseDTO">
+    	INSERT INTO `swu_userrole` (
+    		`user_id`,
+    		`role_id`
+    	)
+    	VALUES
+		 (
+		 #{userId},
+		 #{roleId}
+		 )
+    </insert>
+    
+    
+    
+    
+    <update id="updateSubbase" parameterType="com.swuorange.dto.SubbaseDTO" >
+    	update swu_subbase set 
+    		subbase_name = #{subbaseName},
+    		subbase_address = #{subbaseAddress},
+    		principal = #{principal},
+    		production_recorder = #{productionRecorder}
+    		where subbase_id = #{subbaseId}
+    </update>
+    
+    <update id="updatePR" parameterType="com.swuorange.dto.SubbaseDTO" >
+    	update swu_user set 
+    		realname = #{productionRecorder}
+    		where user_id = #{userId}
+    </update>
+    
+    <update id="update2ndStaffpc" parameterType="com.swuorange.dto.SubbaseDTO">
+    	update swu_secondary_staff set
+    		staff_id = #{subbasePCStaffId}
+    		where subbase_id = #{subbaseId} and user_id = 0
+    </update>
+    
+    <update id="update2ndStaffpr" parameterType="com.swuorange.dto.SubbaseDTO">
+    	update swu_secondary_staff set
+    		staff_id = #{subbasePRStaffId}
+    		where subbase_id = #{subbaseId} and user_id = #{userId}
+    </update>
+    
+    
+    
+      
+    <delete id="deleteSubbase" parameterType="com.swuorange.dto.SubbaseDTO">
+    	
+    	delete from swu_subbase where subbase_id = #{subbaseId}
+    
+    </delete>
+    
+    <delete id="deleteUser" parameterType="com.swuorange.dto.SubbaseDTO">
+    	
+    	delete from swu_user where user_id = #{userId}
+    
+    </delete>
+    
+    <delete id="deleteSss" parameterType="com.swuorange.dto.SubbaseDTO">
+    	
+    	delete from swu_secondary_staff where subbase_id = #{subbaseId}
+    
+    </delete>
+    
+    <delete id="deleteUserRole" parameterType="com.swuorange.dto.SubbaseDTO">
+    	
+    	delete from swu_userrole where user_id = #{userId}
+    
+    </delete>
+    
+    <delete id="delSubbaseById" parameterType="java.lang.Integer">
+		delete from swu_subbase
+		where subbase_id = #{subbaseId}
+	</delete>
+    
+
+</mapper>

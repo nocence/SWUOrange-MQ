@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置对应的mapper映射文件 -->
+<mapper namespace="com.swuorange.dao.UserRoleMapper">
+	<!-- id 要改成对应的mapper文件中方法名 resultType 要改成对应的返回值类型 -->
+	<!--将注册的新用户插入数据库  -->
+	<insert id="insert" parameterType="com.swuorange.po.UserRole" useGeneratedKeys="true" keyProperty="userRoleId">
+        INSERT INTO `swu_userrole` (
+          user_id,role_id
+        )
+        VALUES
+          (
+          #{userId},#{roleId}
+          )
+    </insert>
+
+	
+
+</mapper>

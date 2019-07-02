@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置对应的mapper映射文件 -->
+<mapper namespace="com.swuorange.dao.UserMapper">
+	<!-- id 要改成对应的mapper文件中方法名 resultType 要改成对应的返回值类型 -->
+	<!--将注册的新用户插入数据库  -->
+	<insert id="insert" parameterType="com.swuorange.po.User" useGeneratedKeys="true" keyProperty="userId">
+        INSERT INTO `swu_user` (
+          account,tel,password,email,realname,regist_time,update_time
+          
+        )
+        VALUES
+          (
+          #{account},#{tel},#{password},#{email},#{realname},#{registTime},#{updateTime}
+          
+          )
+    </insert>
+
+<!-- 用户进行企业验证之后修改用户表里的企业信息ID -->
+	<update id="updateByUserId" parameterType="com.swuorange.po.Companyinfo" >
+		update swu_user 
+			<set>
+				companyinfo_id=#{companyinfoId}
+			</set>
+		where user_id=#{userId}
+	</update>
+
+	
+
+</mapper>

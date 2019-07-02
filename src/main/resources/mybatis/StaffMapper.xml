@@ -1,0 +1,24 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置对应的mapper映射文件 -->
+<mapper namespace="com.swuorange.dao.StaffMapper">
+	<!-- id 要改成对应的mapper文件中方法名 resultType 要改成对应的返回值类型 -->
+	<!--将注册的新用户插入数据库  -->
+	<insert id="insert" parameterType="com.swuorange.po.Staff" useGeneratedKeys="true" keyProperty="staffId">
+        INSERT INTO `swu_staffs` (
+          staff_name,staff_password,staff_sex,staff_age,staff_tel,staff_email,companyinfo_id
+          
+        )        
+        VALUES
+          (
+          #{staffName},#{staffPassword},#{staffSex},#{staffAge},#{staffTel},#{staffEmail},#{companyinfoId}
+          
+          )
+    </insert>
+
+
+
+
+	
+
+</mapper>
